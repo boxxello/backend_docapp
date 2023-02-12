@@ -4,32 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4007cee-d915-45e9-bce2-d18971c650e0" name="Changes" comment="#">
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared_docapp/src/main/java/com/docapp/shared_docapp/models/Studente.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared_docapp/src/main/java/com/docapp/shared_docapp/models/Studente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/SpringBootSecurityJwtApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/controllers/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/controllers/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/models/ERole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/models/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/models/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/payload/request/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/payload/request/SignupRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/payload/response/JwtResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/payload/response/MessageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/repository/RoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/security/WebSecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/security/jwt/AuthEntryPointJwt.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/security/jwt/AuthTokenFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/security/jwt/JwtUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/security/services/UserDetailsImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/docapp/springjwt/security/services/UserDetailsServiceImpl.java" beforeDir="false" />
+    <list default="true" id="a4007cee-d915-45e9-bce2-d18971c650e0" name="Changes" comment="Unione backend con shared">
+      <change afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +74,8 @@
       <workItem from="1675520324772" duration="5559000" />
       <workItem from="1676129214327" duration="3226000" />
       <workItem from="1676132740351" duration="5090000" />
-      <workItem from="1676218399899" duration="2566000" />
+      <workItem from="1676218399899" duration="2920000" />
+      <workItem from="1676241412347" duration="689000" />
     </task>
     <task id="LOCAL-00001" summary="Removed mod user, not needed">
       <created>1673812048693</created>
@@ -126,7 +105,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676235819269</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="#">
+      <created>1676235940053</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676235940053</updated>
+    </task>
+    <task id="LOCAL-00006" summary="#">
+      <created>1676236033878</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1676236033878</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,7 +140,7 @@
     <MESSAGE value="Removed mod user, not needed" />
     <MESSAGE value="JDBC string updated" />
     <MESSAGE value="Include gitignore" />
-    <MESSAGE value="#" />
-    <option name="LAST_COMMIT_MESSAGE" value="#" />
+    <MESSAGE value="Unione backend con shared" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unione backend con shared" />
   </component>
 </project>
