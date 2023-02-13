@@ -3,7 +3,7 @@ package com.docapp.shared_docapp.models;
 import java.util.HashMap;
 
 public class Documenti_Visualizzati implements IEntity {
-    public static final String TABLE_NAME ="documenti_visualizzati";
+    public static final String TABLE_NAME ="DocumentiVisualizzati";
     private int id_documento;
     private String email_studente;
 

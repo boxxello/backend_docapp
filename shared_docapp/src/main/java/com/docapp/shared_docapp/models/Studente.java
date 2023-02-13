@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Studente implements Serializable, IEntity {
-    public static final String TABLE_NAME = "studente";
+    public static final String TABLE_NAME = "Studente";
 
     private String email, nickname, password;
     private boolean is_admin;

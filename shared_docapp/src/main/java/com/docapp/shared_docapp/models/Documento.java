@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Documento implements Serializable, IEntity {
-    public static final String TABLE_NAME ="documento";
+    public static final String TABLE_NAME ="Documento";
     private String nome, descrizione, universita, facolta, corso_di_studio, path;
     private int dimensione, id_documento;
 

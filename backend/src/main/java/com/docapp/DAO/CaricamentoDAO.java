@@ -18,7 +18,7 @@ public class CaricamentoDAO extends SQLDAO implements DAO<Caricamento> {
 
     @Override
     public List<Caricamento> doRetrieveByCondition(String condition) throws SQLException {
-        return (List<Caricamento>) GenericDAO.genericDoRetrieveByCondition(Caricamento.TABLE_NAME, condition, new CaricamentoExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Caricamento.TABLE_NAME, condition, new CaricamentoExtractor(), source);
     }
 
     @Override

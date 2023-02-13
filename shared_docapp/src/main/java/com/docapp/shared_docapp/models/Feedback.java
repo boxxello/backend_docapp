@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Feedback implements Serializable, IEntity {
-    public static final String TABLE_NAME ="feedback";
+    public static final String TABLE_NAME ="Feedback";
     private int id;
     private String email;
 

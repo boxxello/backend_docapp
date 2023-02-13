@@ -3,7 +3,7 @@ package com.docapp.shared_docapp.models;
 import java.util.HashMap;
 
 public class Messaggio implements IEntity {
-    public static final String TABLE_NAME ="messaggio";
+    public static final String TABLE_NAME ="Messaggio";
     private String  email_studente, testo, tms;
     private int id_conversazione, id_messaggio;
 

@@ -3,12 +3,9 @@ package com.docapp.shared_docapp.models;
 import java.util.HashMap;
 
 public class Post implements IEntity {
-    public static final String TABLE_NAME = "post";
+    public static final String TABLE_NAME = "Post";
     private String titolo, testo, id_post;
     private boolean is_domanda;
-
-    public Post() {
-    }
 
     public Post(String titolo, String testo, boolean is_domanda) {
         this.titolo = titolo;

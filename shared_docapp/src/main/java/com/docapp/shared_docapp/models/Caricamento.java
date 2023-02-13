@@ -3,7 +3,7 @@ package com.docapp.shared_docapp.models;
 import java.util.HashMap;
 
 public class Caricamento implements IEntity {
-    public static final String TABLE_NAME = "caricamento";
+    public static final String TABLE_NAME = "Caricamento";
     private int id;
     private String email;
 
