@@ -3,6 +3,8 @@ package com.docapp.springjwt.controllers;
 import com.docapp.DAO.PostDAO;
 import com.docapp.Utils.ConnPom;
 import com.docapp.shared_docapp.models.Post;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -24,7 +26,7 @@ import java.util.List;
 public class PostController {
     @GetMapping("/all")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public  ResponseEntity<JsonObject> allAccess() {
+    public ResponseEntity<String> allAccess() {
         PostDAO dao = new PostDAO(ConnPom.getDatasource());
         try {
             List<Post> posts = dao.doRetrieveAll();
@@ -32,15 +34,11 @@ public class PostController {
             for (Post post : posts) {
                 list_of_hashmaps.add(post.toHashMap());
             }
-
-            JsonObject json = new JsonObject();
-            Gson gson = new Gson();
-            json.add("posts",  gson.toJsonTree(list_of_hashmaps));
-            System.out.println(json);
-            return ResponseEntity.ok(json);
-        } catch (SQLException throwables) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(list_of_hashmaps);
+            return ResponseEntity.ok().body(json);
+        } catch (SQLException | JsonProcessingException throwables) {
             return null;
         }
-
     }
 }

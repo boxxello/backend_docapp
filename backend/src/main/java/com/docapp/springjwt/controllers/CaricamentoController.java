@@ -14,17 +14,5 @@ import java.sql.SQLException;
 @RestController
 @RequestMapping("/api/caricamento")
 public class CaricamentoController {
-    @GetMapping("/all")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public String allAccess() {
 
-        CaricamentoDAO dao = new CaricamentoDAO(ConnPom.getDatasource());
-        try{
-            return dao.doRetrieveAll().toString();
-        } catch (SQLException throwables) {
-           return "errore";
-        }
-
-
-    }
 }
