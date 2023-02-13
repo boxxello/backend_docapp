@@ -1,17 +1,20 @@
 package com.docapp.DAO;
 
-import com.docapp.shared_docapp.Extractors.FeedbackExtractor;
-import com.docapp.shared_docapp.dao_related.DAO;
-import com.docapp.shared_docapp.dao_related.GenericDAO;
-import com.docapp.shared_docapp.dao_related.SQLDAO;
+import com.docapp.Extractors.FeedbackExtractor;
+import com.docapp.dao_related.DAO;
+import com.docapp.dao_related.GenericDAO;
+import com.docapp.dao_related.SQLDAO;
 import com.docapp.shared_docapp.models.Feedback;
+
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-public class FeedbackDAO  extends SQLDAO implements DAO<Feedback> {
+public class FeedbackDAO extends SQLDAO implements DAO<Feedback> {
+
+
     public FeedbackDAO(DataSource source) {
         super(source);
     }

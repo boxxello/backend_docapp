@@ -1,9 +1,9 @@
 package com.docapp.DAO;
 
-import com.docapp.shared_docapp.Extractors.CaricamentoExtractor;
-import com.docapp.shared_docapp.dao_related.DAO;
-import com.docapp.shared_docapp.dao_related.GenericDAO;
-import com.docapp.shared_docapp.dao_related.SQLDAO;
+import com.docapp.Extractors.CaricamentoExtractor;
+import com.docapp.dao_related.DAO;
+import com.docapp.dao_related.GenericDAO;
+import com.docapp.dao_related.SQLDAO;
 import com.docapp.shared_docapp.models.Caricamento;
 
 import javax.sql.DataSource;
@@ -18,7 +18,7 @@ public class CaricamentoDAO extends SQLDAO implements DAO<Caricamento> {
 
     @Override
     public List<Caricamento> doRetrieveByCondition(String condition) throws SQLException {
-        return GenericDAO.genericDoRetrieveByCondition(Caricamento.TABLE_NAME, condition, new CaricamentoExtractor(), source);
+        return (List<Caricamento>) GenericDAO.genericDoRetrieveByCondition(Caricamento.TABLE_NAME, condition, new CaricamentoExtractor(), source);
     }
 
     @Override

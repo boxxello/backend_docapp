@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4007cee-d915-45e9-bce2-d18971c650e0" name="Changes" comment="Unione backend con shared">
-      <change afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/CaricamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/CaricamentoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/ConversazioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/ConversazioneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/Documenti_VisualizzatiDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/Documenti_VisualizzatiDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/DocumentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/DocumentoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/FeedbackDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/FeedbackDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/Interazione_PostDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/Interazione_PostDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/MessaggioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/MessaggioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/PostDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/PostDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/StudenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/DAO/StudenteDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +82,7 @@
       <workItem from="1676132740351" duration="5090000" />
       <workItem from="1676218399899" duration="2920000" />
       <workItem from="1676241412347" duration="689000" />
+      <workItem from="1676317705663" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="Removed mod user, not needed">
       <created>1673812048693</created>

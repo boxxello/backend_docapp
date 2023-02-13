@@ -1,9 +1,9 @@
 package com.docapp.DAO;
 
-import com.docapp.shared_docapp.Extractors.ConversazioneExtractor;
-import com.docapp.shared_docapp.dao_related.DAO;
-import com.docapp.shared_docapp.dao_related.GenericDAO;
-import com.docapp.shared_docapp.dao_related.SQLDAO;
+import com.docapp.Extractors.ConversazioneExtractor;
+import com.docapp.dao_related.DAO;
+import com.docapp.dao_related.GenericDAO;
+import com.docapp.dao_related.SQLDAO;
 import com.docapp.shared_docapp.models.Conversazione;
 
 import javax.sql.DataSource;

@@ -1,9 +1,9 @@
 package com.docapp.DAO;
 
-import com.docapp.shared_docapp.Extractors.StudenteExtractor;
-import com.docapp.shared_docapp.dao_related.DAO;
-import com.docapp.shared_docapp.dao_related.GenericDAO;
-import com.docapp.shared_docapp.dao_related.SQLDAO;
+import com.docapp.Extractors.StudenteExtractor;
+import com.docapp.dao_related.DAO;
+import com.docapp.dao_related.GenericDAO;
+import com.docapp.dao_related.SQLDAO;
 import com.docapp.shared_docapp.models.Studente;
 
 import javax.sql.DataSource;

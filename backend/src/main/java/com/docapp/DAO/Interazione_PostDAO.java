@@ -1,10 +1,11 @@
 package com.docapp.DAO;
 
-import com.docapp.shared_docapp.Extractors.Interazione_PostExtractor;
-import com.docapp.shared_docapp.dao_related.DAO;
-import com.docapp.shared_docapp.dao_related.GenericDAO;
-import com.docapp.shared_docapp.dao_related.SQLDAO;
+import com.docapp.Extractors.Interazione_PostExtractor;
+import com.docapp.dao_related.DAO;
+import com.docapp.dao_related.GenericDAO;
+import com.docapp.dao_related.SQLDAO;
 import com.docapp.shared_docapp.models.Interazione_Post;
+
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
