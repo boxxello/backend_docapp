@@ -1,10 +1,10 @@
 package com.docapp.DAO;
 
 import com.docapp.Extractors.DocumentoExtractor;
-import com.docapp.dao_related.DAO;
 import com.docapp.dao_related.GenericDAO;
 import com.docapp.dao_related.SQLDAO;
 import com.docapp.shared_docapp.models.Documento;
+import com.docapp.shared_docapp.shared_DAO.DAO;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;

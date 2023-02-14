@@ -1,4 +1,4 @@
-package com.docapp.dao_related;
+package com.docapp.shared_docapp.shared_DAO;
 
 import java.sql.SQLException;
 import java.util.HashMap;

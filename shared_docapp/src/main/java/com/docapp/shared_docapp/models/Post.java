@@ -7,6 +7,10 @@ public class Post implements IEntity {
     private String titolo, testo, id_post;
     private boolean is_domanda;
 
+    public Post() {
+
+    }
+
     public Post(String titolo, String testo, boolean is_domanda) {
         this.titolo = titolo;
         this.testo = testo;

@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="models_export">
-    <output-path>$PROJECT_DIR$/out/artifacts/models_export</output-path>
-    <root id="archive" name="models_export.jar">
-      <element id="dir-copy" path="$PROJECT_DIR$/src/main/java/com/docapp/shared_docapp/models" />
-    </root>
-  </artifact>
-</component>

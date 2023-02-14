@@ -15,14 +15,13 @@ import javax.validation.constraints.Size;
       @UniqueConstraint(columnNames = "email") 
     })
 public class User {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+
 
   @NotBlank
   @Size(max = 20)
   private String username;
 
+  @Id
   @NotBlank
   @Size(max = 50)
   @Email
@@ -34,7 +33,7 @@ public class User {
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 
-        joinColumns = @JoinColumn(name = "user_id"), 
+        joinColumns = @JoinColumn(name = "email"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
@@ -47,13 +46,7 @@ public class User {
     this.password = password;
   }
 
-  public Long getId() {
-    return id;
-  }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public String getUsername() {
     return username;
@@ -78,6 +71,7 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
+
 
   public Set<Role> getRoles() {
     return roles;
