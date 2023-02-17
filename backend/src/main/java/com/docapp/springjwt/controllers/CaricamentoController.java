@@ -1,6 +1,5 @@
 package com.docapp.springjwt.controllers;
 
-import com.docapp.DAO.CaricamentoDAO;
 import com.docapp.Utils.ConnPom;
 
 import org.springframework.security.access.prepost.PreAuthorize;
