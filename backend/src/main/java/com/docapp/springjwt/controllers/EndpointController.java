@@ -42,6 +42,8 @@ public class EndpointController {
         Map<RequestMappingInfo, HandlerMethod> handlerMethods =
                 this.requestMappingHandlerMapping.getHandlerMethods();
         List<String> endpoints = new ArrayList<>();
+
+        //get the AuthController endpoints
         for (Map.Entry<RequestMappingInfo, HandlerMethod> item : handlerMethods.entrySet()) {
             RequestMappingInfo mapping = item.getKey();
             HandlerMethod method = item.getValue();
