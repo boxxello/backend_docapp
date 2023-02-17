@@ -1,6 +1,5 @@
 package com.docapp.Utils;
 
-import com.docapp.dao_related.GenericDAO;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 
