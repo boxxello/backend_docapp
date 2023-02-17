@@ -3,24 +3,30 @@ package com.docapp.springjwt.controllers;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 
 import com.docapp.springjwt.models.ERole;
 import com.docapp.springjwt.models.Role;
 import com.docapp.springjwt.models.User;
+import com.docapp.springjwt.security.services.UserDetailsServiceImpl;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.web.bind.annotation.*;
 
 import com.docapp.springjwt.payload.request.LoginRequest;
 import com.docapp.springjwt.payload.request.SignupRequest;
@@ -52,7 +58,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+        System.out.println("loginRequest = " + loginRequest.toString());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -69,6 +75,17 @@ public class AuthController {
                 userDetails.getEmail(),
                 roles));
     }
+
+    //make a method to search in the database for the user when the authentication is successful
+    //then return the user object
+    @PostMapping("/signin_token")
+    public ResponseEntity<?> getUser(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
