@@ -70,11 +70,12 @@ public class DocumentoTest{
         validator = factory.getValidator();
 
 
-
+        documento=new Documento();
         documento.setFacolta("Ingegneria");
         documento.setCorsoDiStudio("Informatica");
         documento.setDimensione(1000L);
         documento.setNome("nome");
+        documento.setStudente(user);
 
 
 
@@ -86,9 +87,60 @@ public class DocumentoTest{
     @Test
     @Transactional
     public void TC_5_1_1(){
-        documento.setDescrizione("titolo");
+       //create a string with 256 characters
+        int n = 71;
+        String str = "a".repeat(n);
+        documento.setNome(str);
+
         Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
-        assertEquals(0, violations.size());
+        assertFalse(violations.isEmpty());
+    }
+    @Test
+    @Transactional
+    public void TC_5_1_2(){
+        //create a string with 256 characters
+        int n = 70;
+        String str = "a".repeat(n);
+        documento.setNome(str);
+
+        Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
+        assertTrue(violations.isEmpty());
+    }
+
+    @Test
+    @Transactional
+    public void TC_5_1_3(){
+        documento.setNome("titolo");
+        Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
+        assertTrue(violations.isEmpty());
+    }
+    @Test
+    @Transactional
+    public void TC_5_1_4(){
+        documento.setDescrizione("*;aaaa");
+        Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
+        assertFalse(violations.isEmpty());
+
+    }
+    @Test
+    @Transactional
+    public void TC_5_1_5(){
+        int n = 651;
+        String str = "a".repeat(n);
+
+        documento.setDescrizione(str);
+        Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
+        assertFalse(violations.isEmpty());
+    }
+    @Test
+    @Transactional
+    public void TC_5_1_6(){
+        int n = 650;
+        String str = "a".repeat(n);
+
+        documento.setDescrizione(str);
+        Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
+        assertTrue(violations.isEmpty());
     }
 
 
