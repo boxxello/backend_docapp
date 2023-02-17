@@ -68,11 +68,8 @@ public class DocumentoTest{
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-
-
         documento=new Documento();
-        documento.setFacolta("Ingegneria");
-        documento.setCorsoDiStudio("Informatica");
+
         documento.setDimensione(1000L);
         documento.setNome("nome");
         documento.setStudente(user);
