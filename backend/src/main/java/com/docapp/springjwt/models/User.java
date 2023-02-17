@@ -2,7 +2,9 @@ package com.docapp.springjwt.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -42,6 +44,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    private List<Documento> documenti = new ArrayList<>();
     public User() {
     }
 
@@ -91,5 +96,16 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+
+    public void addDocumento(Documento documento) {
+        documenti.add(documento);
+        documento.setStudente(this);
+    }
+
+    public void removeDocumento(Documento documento) {
+        documenti.remove(documento);
+        documento.setStudente(null);
     }
 }
