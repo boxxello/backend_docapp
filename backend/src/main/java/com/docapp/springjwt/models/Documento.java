@@ -22,14 +22,10 @@ public class Documento {
     @Column(name = "descrizione", nullable = false)
     private String descrizione;
 
-    @Column(name = "universita", length = 40, nullable = false)
-    private String universita;
+    @ManyToOne
+    @JoinColumn(name = "universita_id")
+    private Universita universita;
 
-    @Column(name = "facolta", length = 40, nullable = false)
-    private String facolta;
-
-    @Column(name = "corso_di_studio", length = 30, nullable = false)
-    private String corsoDiStudio;
 
     @Column(name = "dimensione", nullable = false)
     private Long dimensione;
@@ -42,12 +38,10 @@ public class Documento {
     public Documento() {
     }
 
-    public Documento(String nome, String descrizione, String universita, String facolta, String corsoDiStudio, Long dimensione, User studente) {
+    public Documento(String nome, String descrizione, Universita universita, Long dimensione, User studente) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.universita = universita;
-        this.facolta = facolta;
-        this.corsoDiStudio = corsoDiStudio;
         this.dimensione = dimensione;
         this.studente = studente;
     }
@@ -77,28 +71,13 @@ public class Documento {
         this.descrizione = descrizione;
     }
 
-    public String setDescrizione() {
+    public Universita getUniversita() {
         return universita;
     }
 
-    public void setUniversita(String universita) {
+
+    public void setUniversita(Universita universita) {
         this.universita = universita;
-    }
-
-    public String getFacolta() {
-        return facolta;
-    }
-
-    public void setFacolta(String facolta) {
-        this.facolta = facolta;
-    }
-
-    public String getCorsoDiStudio() {
-        return corsoDiStudio;
-    }
-
-    public void setCorsoDiStudio(String corsoDiStudio) {
-        this.corsoDiStudio = corsoDiStudio;
     }
 
     public Long getDimensione() {
