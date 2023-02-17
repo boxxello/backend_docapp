@@ -3,10 +3,10 @@ package com.docapp.springjwt.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
-
+    @NotBlank
     private String username;
 
-    private String email;
+    /*private String email;
 
     public String getEmail() {
         return email;
@@ -14,7 +14,7 @@ public class LoginRequest {
 
     public void setEmail(String email) {
         this.email = email;
-    }
+    }*/
 
     @NotBlank
     private String password;
