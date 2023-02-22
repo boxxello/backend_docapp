@@ -68,6 +68,7 @@ public class AuthControllerTest {
 
     //ci prepariamo il nostro utente per i test
     @BeforeEach
+    @Transactional
     public void setUp() {
         user = new User();
         user.setUsername("test2");
