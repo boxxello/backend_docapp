@@ -5,45 +5,35 @@ package com.docapp.springjwt.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "documentiVisualizzati")
+@Table(name = "documentivisualizzati")
 public class DocumentiVisualizzati {
 
-    @EmbeddedId
-    private DocumentiVisualizzatiId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
-    @MapsId("documento")
-    @JoinColumn(name = "documento")
-    private Documento documento;
-
-    @ManyToOne
-    @MapsId("studente")
-    @JoinColumn(name = "studente")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User studente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "documento_id")
+    private Documento documento;
 
     public DocumentiVisualizzati() {
     }
 
-    public DocumentiVisualizzati(Documento documento, User studente) {
-        this.documento = documento;
+    public DocumentiVisualizzati(User studente, Documento documento) {
         this.studente = studente;
-        this.id = new DocumentiVisualizzatiId(documento.getId(), studente.getId());
+        this.documento = documento;
     }
 
-    public DocumentiVisualizzatiId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(DocumentiVisualizzatiId id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Documento getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(Documento documento) {
-        this.documento = documento;
     }
 
     public User getStudente() {
@@ -52,5 +42,13 @@ public class DocumentiVisualizzati {
 
     public void setStudente(User studente) {
         this.studente = studente;
+    }
+
+    public Documento getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
     }
 }
