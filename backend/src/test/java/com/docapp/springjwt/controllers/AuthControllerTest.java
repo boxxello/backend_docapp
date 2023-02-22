@@ -83,6 +83,7 @@ public class AuthControllerTest {
     }
 
     //unit test
+    //TC_1.1_1 ME1
     @Test
     @Transactional
     public void testRegistrazioneBad() {
@@ -98,6 +99,7 @@ public class AuthControllerTest {
     }
 
     //unit test
+    //TC_1.1_3 ME2
     @Transactional
     @Test
     public void testRegistrazioneGoodEmail() throws Exception {
@@ -109,6 +111,7 @@ public class AuthControllerTest {
     }
 
     //integration test
+    //TC_1.1_3 MP2
     @Transactional
     @Test
     public void testLogin() throws Exception {
@@ -137,6 +140,7 @@ public class AuthControllerTest {
 
 
     //integration test
+    //TC_1.1_2 MP1
     @Transactional
     @Test
     public void testLoginBad() throws Exception {
