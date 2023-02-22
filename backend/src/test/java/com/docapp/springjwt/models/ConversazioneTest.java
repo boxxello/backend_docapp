@@ -1,4 +1,4 @@
-package com.docapp.springjwt.controllers;
+package com.docapp.springjwt.models;
 
 
 import com.docapp.springjwt.models.*;
