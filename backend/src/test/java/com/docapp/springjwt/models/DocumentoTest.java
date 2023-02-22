@@ -84,7 +84,7 @@ public class DocumentoTest{
     @Test
     @Transactional
     public void TC_5_1_1(){
-       //create a string with 256 characters
+       //create a string with 71 characters
         int n = 71;
         String str = "a".repeat(n);
         documento.setNome(str);
@@ -95,7 +95,7 @@ public class DocumentoTest{
     @Test
     @Transactional
     public void TC_5_1_2(){
-        //create a string with 256 characters
+        //create a string with 70 characters
         int n = 70;
         String str = "a".repeat(n);
         documento.setNome(str);
