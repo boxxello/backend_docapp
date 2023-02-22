@@ -80,6 +80,8 @@ public class ConversazioneTest {
 
     }
 
+    //TC_4.1_1
+    //LCM1
 
     @Test
     @Transactional
@@ -95,7 +97,8 @@ public class ConversazioneTest {
         }
 
     }
-
+    //TC_4.1_2
+    //LCM2
     @Test
     @Transactional
     public void controlloMessaggiPrecedentiMessaggio() {
