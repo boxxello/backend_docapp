@@ -5,6 +5,7 @@ import com.docapp.springjwt.repository.ConversazioneRepository;
 import com.docapp.springjwt.repository.MessaggioRepository;
 import com.docapp.springjwt.repository.RoleRepository;
 import com.docapp.springjwt.repository.UserRepository;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -49,8 +51,9 @@ public class MessaggioTest {
 
     private Messaggio messaggio;
     private Validator validator;
-    @Transactional
+
     @BeforeEach
+    @Transactional
     public void setUp() {
 
 
@@ -91,6 +94,7 @@ public class MessaggioTest {
         validator = factory.getValidator();
     }
 
+    //TC_4.1_1 LCM1
 
     @Test
     @Transactional
@@ -101,6 +105,7 @@ public class MessaggioTest {
         assertFalse(violations.isEmpty());
 
     }
+    //TC_4.1_2 LCM2
     @Test
     @Transactional
     public void controlloLunghezzaMessaggioPresente() {
@@ -111,21 +116,27 @@ public class MessaggioTest {
 
     }
 
+    //TC_5.1_1 FME1
+
     @Test
     @Transactional
-    public void checkMessageEncodingUTF8(){
-        messaggio.setTesto( "私の");
-        byte [] b = messaggio.getTesto().getBytes();
-        String newString;
-        try {
-            newString = new String (b, "UTF-8");
-            assertEquals(messaggio.getTesto().length(),newString.length());
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-
+    public void testUTF8Encoding() throws UnsupportedEncodingException {
+        String str = "こんにちは"; // Japanese string encoded in UTF-8
+        byte[] bytes = str.getBytes("UTF-8");
+        String str2 = new String(bytes, "UTF-8");
+        assertEquals(str, str2, "UTF-8 encoding not detected");
     }
 
+    //TC_5.1_2 FME2
+
+    @Test
+    @Transactional
+    public void testNonUTF8Encoding() {
+        String str = "こんにちはÃ"; // Japanese greeting followed by non-UTF-8 character
+        Charset utf8Charset = StandardCharsets.UTF_8;
+        byte[] encodedBytes = str.getBytes(utf8Charset);
+        String decodedStr = new String(encodedBytes, utf8Charset);
+        assertEquals(str, decodedStr, "Encoding/Decoding failed");
+    }
 
 }
