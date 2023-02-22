@@ -47,6 +47,11 @@ public class User {
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
 
     private List<Documento> documenti = new ArrayList<>();
+
+    @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DocumentiVisualizzati> documentiVisualizzati = new ArrayList<>();
+
+
     public User() {
     }
 
@@ -98,6 +103,9 @@ public class User {
         this.roles = roles;
     }
 
+    public List<Documento> getDocumenti() {
+        return documenti;
+    }
 
     public void addDocumento(Documento documento) {
         documenti.add(documento);
@@ -108,4 +116,27 @@ public class User {
         documenti.remove(documento);
         documento.setStudente(null);
     }
+    public List<DocumentiVisualizzati> getDocumentiVisualizzati() {
+        return documentiVisualizzati;
+    }
+
+    public void setDocumentiVisualizzati(List<DocumentiVisualizzati> documentiVisualizzati) {
+        this.documentiVisualizzati = documentiVisualizzati;
+    }
+
+    public void addDocumentoVisualizzato(Documento documento) {
+        DocumentiVisualizzati dv = new DocumentiVisualizzati(this, documento);
+        documentiVisualizzati.add(dv);
+    }
+
+    public void removeDocumentoVisualizzato(Documento documento) {
+        for (DocumentiVisualizzati dv : documentiVisualizzati) {
+            if (dv.getDocumento().equals(documento)) {
+                documentiVisualizzati.remove(dv);
+                dv.setStudente(null);
+                break;
+            }
+        }
+    }
+
 }
