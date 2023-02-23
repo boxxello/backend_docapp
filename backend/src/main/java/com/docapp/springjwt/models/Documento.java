@@ -1,6 +1,9 @@
 package com.docapp.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +14,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "documento")
 public class Documento {
-    public static final String basepath="./uploads/documenti/";
+    public static final String basepath="uploads/documenti/";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +40,13 @@ public class Documento {
     @Column(name = "dimensione")
     private Long dimensione;
 
+
+    //we use JsonManagedReference to avoid infinite recursion, but also
+    //to show the studente field in the json response
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "studente_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @JoinColumn(name = "studente_id" )
     private User studente;
 
     @NotNull
