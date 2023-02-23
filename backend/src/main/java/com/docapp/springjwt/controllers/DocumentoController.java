@@ -8,11 +8,13 @@ import com.docapp.springjwt.repository.DocumentoRepository;
 import com.docapp.springjwt.repository.UserRepository;
 import com.docapp.springjwt.security.jwt.JwtUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,9 +29,13 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import static com.docapp.Utils.MD5Checksum.getMD5Checksum;
 import static com.docapp.Utils.PathUtils.*;
@@ -44,9 +50,11 @@ public class DocumentoController {
     @Autowired
     private DocumentoRepository documentoRepository;
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> addDocumento(Documento documento, BindingResult result, @RequestParam("file") MultipartFile file,
-                                          @AuthenticationPrincipal UserDetails userDetails) {
+
+
+    @PostMapping("/add_documento")
+    public ResponseEntity<?> uploadFile(Documento documento, BindingResult result, @RequestParam("file") MultipartFile file,
+                                        @AuthenticationPrincipal UserDetails userDetails) {
 
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body(result.getAllErrors());
@@ -67,7 +75,7 @@ public class DocumentoController {
                 return ResponseEntity.badRequest().body("File non valido. Assicurati che il file sia un documento PDF, Word, Excel o PowerPoint e non superi i 10 MB.");
             }
             // set the document name to the file name
-            documento.setNome(filename);
+
 
             // set the file size
             documento.setDimensione(file.getSize());
@@ -116,46 +124,74 @@ public class DocumentoController {
 
         //if the id is not specified in the request, return all the documents of the user
         if (id == null) {
-            List<Documento> documenti = documentoRepository.findAllByStudente(user_to_retrieve_from);
+            List<Documento> documenti = documentoRepository.findAllByStudente(user_to_retrieve_from)
+                    .orElseThrow(() -> new ResourceNotFoundException("No document found for this user " + user_to_retrieve_from.getUsername() + "."));
             return ResponseEntity.ok().body(documenti);
         } else {
             Documento documento = documentoRepository.findByIdAndStudente(id, user_to_retrieve_from)
-                    .orElseThrow(() -> new ResourceNotFoundException("Documento not found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Documento " + id + " non trovato per l'utente " + user_to_retrieve_from.getUsername() + "."));
             return ResponseEntity.ok().body(documento);
         }
 
     }
 
     @GetMapping("/download")
-    @ResponseBody
-    public List<FileSystemResource> downloadDocumento(@AuthenticationPrincipal UserDetails userDetails,
-                                                      @RequestParam(required = false) Long id,
-                                                      @RequestParam(required = false) String username) {
-        //if the username is not specified in the request, return the current user's documents
+    public ResponseEntity<FileSystemResource> downloadDocumento(@AuthenticationPrincipal UserDetails userDetails,
+                                                                @RequestParam(required = false) Long id,
+                                                                @RequestParam(required = false) String username) throws IOException {
+
+        // if the username is not specified in the request, return the current user's documents
         User user_to_retrieve_from;
         if (username == null) {
             user_to_retrieve_from = userRepository.findByUsername(userDetails.getUsername())
                     .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
-
         } else {
             user_to_retrieve_from = userRepository.findByUsername(username)
                     .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
         }
 
-        //if the id is not specified in the request, return all the documents of the user
+        // if the id is not specified in the request, return all the documents of the user
         if (id == null) {
-            List<Documento> documenti = documentoRepository.findAllByStudente(user_to_retrieve_from);
-            List<FileSystemResource> resources = new ArrayList<>();
+            List<Documento> documenti = documentoRepository.findAllByStudente(user_to_retrieve_from)
+                    .orElseThrow(() -> new ResourceNotFoundException("No document found for this user " + user_to_retrieve_from.getUsername() + "."));
+            logger.info("Downloading all the documents of the user " + user_to_retrieve_from.getUsername() + ".");
+            // create a temp file to hold the zip output stream
+            //Tmp file appends a random string to the file name to avoid collisions
+            File zipFile = File.createTempFile("docapp_zip_" + user_to_retrieve_from.getUsername(), ".zip");
+            logger.info("Created temp file " + zipFile.getName() + " to hold the zip output stream.");
+            // create a zip output stream
+            ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
+
+            // loop through all the documents and add them to the zip file
             for (Documento documento : documenti) {
-                resources.add(new FileSystemResource(new File(documento.getPath())));
+                File file = new File(documento.getPath());
+                ZipEntry zipEntry = new ZipEntry(file.getName());
+                zipOutputStream.putNextEntry(zipEntry);
+                FileInputStream fileInputStream = new FileInputStream(file);
+                IOUtils.copy(fileInputStream, zipOutputStream);
+                fileInputStream.close();
+                zipOutputStream.closeEntry();
             }
-            return resources;
+
+            // close the zip output stream
+            zipOutputStream.close();
+
+            // return the zip file as a FileSystemResource
+            FileSystemResource fileSystemResource = new FileSystemResource(zipFile);
+            logger.info(zipFile.getName());
+            zipFile.deleteOnExit();
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + zipFile.getName())
+                    .body(fileSystemResource);
+
         } else {
+            // return a single file
             Documento documento = documentoRepository.findByIdAndStudente(id, user_to_retrieve_from)
                     .orElseThrow(() -> new ResourceNotFoundException("Documento not found"));
-            return Collections.singletonList(new FileSystemResource(new File(documento.getPath())));
+            FileSystemResource fileSystemResource = new FileSystemResource(new File(documento.getPath()));
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileSystemResource.getFilename())
+                    .body(fileSystemResource);
         }
     }
 
