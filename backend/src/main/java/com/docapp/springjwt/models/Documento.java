@@ -1,51 +1,85 @@
 package com.docapp.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "documento")
 public class Documento {
+    public static final String basepath="./uploads/documenti/";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Size(max = 70)
-    @Column(name = "nome", length = 30, nullable = false)
+    @Column(name = "nome")
     private String nome;
 
     //regex per descrizione
     @Pattern(regexp = "^[A-Za-z0-9.,; ]*$", message = "Descrizione cannot contain special characters")
     @Size(max = 650)
-    @Column(name = "descrizione", nullable = false)
+    @NotNull
+    @Column(name = "descrizione")
     private String descrizione;
 
     @ManyToOne
     @JoinColumn(name = "universita_id")
     private Universita universita;
 
-
-    @Column(name = "dimensione", nullable = false)
+    @NotNull
+    @Column(name = "dimensione")
     private Long dimensione;
 
-
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "studente_id")
     private User studente;
 
+    @NotNull
+    @Column(name = "path")
+    @JsonIgnore
+    private String path;
+
+
+    @NotNull
+    @Column(name = "hash")
+    private String hash;
+
     public Documento() {
     }
 
-    public Documento(String nome, String descrizione, Universita universita, Long dimensione, User studente) {
+    public Documento(String nome, String descrizione, Universita universita, Long dimensione, User studente, String path, String hash){
         this.nome = nome;
         this.descrizione = descrizione;
         this.universita = universita;
         this.dimensione = dimensione;
         this.studente = studente;
+        this.path= path;
+        this.hash= hash;
     }
 
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public Long getId() {
         return id;
@@ -95,4 +129,6 @@ public class Documento {
     public void setStudente(User studente) {
         this.studente = studente;
     }
+
+
 }
