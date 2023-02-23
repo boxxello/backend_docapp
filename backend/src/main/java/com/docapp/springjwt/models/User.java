@@ -1,6 +1,8 @@
 package com.docapp.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,10 +47,11 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
-
+    @JsonBackReference
     private List<Documento> documenti = new ArrayList<>();
 
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<DocumentiVisualizzati> documentiVisualizzati = new ArrayList<>();
 
 
