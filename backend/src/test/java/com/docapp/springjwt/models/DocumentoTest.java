@@ -18,16 +18,21 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static com.docapp.Utils.MD5Checksum.getMD5Checksum;
+
+import static com.docapp.Utils.PathUtils.save_file_to_path;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DocumentoTest{
+public class DocumentoTest {
 
     @Autowired
     ConversazioneRepository conversazioneRepository;
@@ -46,6 +51,7 @@ public class DocumentoTest{
     private Messaggio messaggio;
     private Validator validator;
     private Documento documento;
+
     @Transactional
     @BeforeEach
     public void setUp() {
@@ -68,23 +74,25 @@ public class DocumentoTest{
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        documento=new Documento();
+        documento = new Documento();
 
         documento.setDimensione(1000L);
         documento.setNome("nome");
         documento.setStudente(user);
+        documento.setPath("path");
+        documento.setDescrizione("descrizione");
+        documento.setHash("hash");
+
 
 
 
     }
 
 
-
-
     @Test
     @Transactional
-    public void TC_5_1_1(){
-       //create a string with 71 characters
+    public void TC_5_1_1() {
+        //create a string with 71 characters
         int n = 71;
         String str = "a".repeat(n);
         documento.setNome(str);
@@ -92,9 +100,10 @@ public class DocumentoTest{
         Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
         assertFalse(violations.isEmpty());
     }
+
     @Test
     @Transactional
-    public void TC_5_1_2(){
+    public void TC_5_1_2() {
         //create a string with 70 characters
         int n = 70;
         String str = "a".repeat(n);
@@ -106,22 +115,24 @@ public class DocumentoTest{
 
     @Test
     @Transactional
-    public void TC_5_1_3(){
+    public void TC_5_1_3() {
         documento.setNome("titolo");
         Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
         assertTrue(violations.isEmpty());
     }
+
     @Test
     @Transactional
-    public void TC_5_1_4(){
+    public void TC_5_1_4() {
         documento.setDescrizione("*;aaaa");
         Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
         assertFalse(violations.isEmpty());
 
     }
+
     @Test
     @Transactional
-    public void TC_5_1_5(){
+    public void TC_5_1_5() {
         int n = 651;
         String str = "a".repeat(n);
 
@@ -129,9 +140,10 @@ public class DocumentoTest{
         Set<ConstraintViolation<Documento>> violations = validator.validate(documento);
         assertFalse(violations.isEmpty());
     }
+
     @Test
     @Transactional
-    public void TC_5_1_6(){
+    public void TC_5_1_6() {
         int n = 650;
         String str = "a".repeat(n);
 
