@@ -15,7 +15,7 @@ public interface DocumentoRepository extends JpaRepository<Documento, Long> {
 
     List<Documento> findAllByStudenteId(Long userId);
 
-    List<Documento> findAllByStudente(User user);
+    Optional<List<Documento>> findAllByStudente(User user);
 
     Optional<Documento> findByIdAndStudente(Long id, User currentUser);
 }
