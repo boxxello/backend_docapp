@@ -15,19 +15,18 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class PathUtils {
-    public static String generate_random_filename(String  originalFileName) throws Exception {
+    public static String generate_random_filename(String originalFileName) throws Exception {
         // retrieve the name of the file
 
 
-
-// generate a random filename based on the original file name
+        // generate a random filename based on the original file name
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        String newFileName = UUID.randomUUID() + extension;
 
-// create a Path object with the new filename
+        // create a Path object with the new filename
 
-      return newFileName;
+        return UUID.randomUUID() + extension;
     }
+
     public static String save_file_to_path(MultipartFile file, String path) throws IOException {
         // save the file to the path
         File uploadDir = new File(Documento.basepath);
@@ -40,10 +39,10 @@ public class PathUtils {
         //write the file to the path
 
         Path filePath = uploadDir.toPath().resolve(path);
-        System.out.println("path: " + path);
-        System.out.println("path: " + filePath.toString());
+
         //get the absolute path of the file after saving it
         Files.write(filePath, file.getBytes());
+        System.out.println("path: " + filePath);
 
 
         return filePath.toAbsolutePath().toString();
