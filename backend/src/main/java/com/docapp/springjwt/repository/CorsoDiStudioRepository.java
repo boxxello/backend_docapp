@@ -12,7 +12,11 @@ import java.util.List;
 public interface CorsoDiStudioRepository extends JpaRepository<CorsoDiStudio, Long> {
 
     CorsoDiStudio findByNome(String nome);
+
     List<CorsoDiStudio> findAllByUniversita(Universita universita);
+
+    List<CorsoDiStudio> findByNomeLike(String nome);
+
     List<CorsoDiStudio> findAllByUniversitaId(Long id);
 
 }
