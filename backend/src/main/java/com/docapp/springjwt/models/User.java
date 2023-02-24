@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -130,6 +127,8 @@ public class User {
     public void addDocumentoVisualizzato(Documento documento) {
         DocumentiVisualizzati dv = new DocumentiVisualizzati(this, documento);
         documentiVisualizzati.add(dv);
+        System.out.println(documentiVisualizzati.get(0).toString());
+
     }
 
     public void removeDocumentoVisualizzato(Documento documento) {

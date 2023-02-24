@@ -41,7 +41,7 @@ public class DocumentoVisualizzatoTest{
     DocumentoRepository documentoRepository;
     private User user;
 
-
+    private DocumentiVisualizzati documentiVisualizzati;
     private Validator validator;
     private Documento documento;
     @Transactional
@@ -79,16 +79,17 @@ public class DocumentoVisualizzatoTest{
         documento.setHash("55e9f259f3cd3be8cada7eba8e7814c9");
         documentoRepository.save(documento);
 
-
-
-
+         documentiVisualizzati= new DocumentiVisualizzati(
+                user, documento
+        );
+        documentiVisualizzatiRepository.save(documentiVisualizzati);
         // Save the instance to the repository
-        user.addDocumentoVisualizzato(documento);
+
         //get all the documents and print them
-        List<DocumentiVisualizzati> documentiVisualizzatis = documentiVisualizzatiRepository.findAll();
-        for (DocumentiVisualizzati documentiVisualizzati : documentiVisualizzatis) {
-            System.out.println(documentiVisualizzati.getDocumento().getNome());
-        }
+//        List<DocumentiVisualizzati> documentiVisualizzatis = documentiVisualizzatiRepository.findAll();
+//        for (DocumentiVisualizzati documentiVisualizzati : documentiVisualizzatis) {
+//            System.out.println(documentiVisualizzati.getDocumento().getNome());
+//        }
 
 
 
@@ -120,6 +121,7 @@ public class DocumentoVisualizzatoTest{
         assertTrue(documenti.stream().anyMatch(dv -> dv.getDocumento().equals(documento)));
 
         user.removeDocumentoVisualizzato(documento);
+        documentiVisualizzatiRepository.delete(documentiVisualizzati);
         //check if the reference has been removed
         documenti = documentiVisualizzatiRepository.findByStudente(user);
         //check if it's the same document
