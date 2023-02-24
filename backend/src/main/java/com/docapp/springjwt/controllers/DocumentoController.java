@@ -7,6 +7,12 @@ import com.docapp.springjwt.models.User;
 import com.docapp.springjwt.repository.DocumentoRepository;
 import com.docapp.springjwt.repository.UserRepository;
 import com.docapp.springjwt.security.jwt.JwtUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonObject;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -49,7 +55,6 @@ public class DocumentoController {
     private UserRepository userRepository;
     @Autowired
     private DocumentoRepository documentoRepository;
-
 
 
     @PostMapping("/add_documento")
@@ -105,36 +110,82 @@ public class DocumentoController {
         }
     }
 
+//    public ArrayNode getJsonObjectFromDocumentoUser(List<Documento> documenti) throws JsonProcessingException {
+//        ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
+//
+//        if (documenti.isEmpty()) {
+//            return arrayNode;
+//        }
+//        for (Documento doc : documenti) {
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            ObjectNode jsonObject = objectMapper.createObjectNode();
+//            User user;
+//            user = userRepository.findById(doc.getStudente().getId())
+//                    .orElse(null);
+//            if (user != null) {
+//                jsonObject.put("studente", new ObjectMapper().writeValueAsString(user));
+//            }
+//            jsonObject.put("documento", new ObjectMapper().writeValueAsString(doc));
+//            arrayNode.add(jsonObject);
+//        }
+//        return arrayNode;
+//    }
+
     @GetMapping("/get")
     public ResponseEntity<?> getDocumenti(@AuthenticationPrincipal UserDetails userDetails,
+                                          @RequestParam String type,
                                           @RequestParam(required = false) Long id,
-                                          @RequestParam(required = false) String username) {
+                                          @RequestParam(required = false) String username) throws JsonProcessingException {
         HashMap<String, Object> response = new HashMap<>();
         //if the username is not specified in the request, return the current user's documents
         User user_to_retrieve_from;
-        if (username == null) {
+        List<Documento> documenti;
+        List<JsonObject> jsonObjectListToReturn = new ArrayList<>();
+        if (Objects.equals(type.toLowerCase(), "m")) {
             user_to_retrieve_from = userRepository.findByUsername(userDetails.getUsername())
-                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                    .orElse(null);
+            if (user_to_retrieve_from == null) {
+                response.put("message", "Internal server error");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            }
+
+        } else if (Objects.equals(type.toLowerCase(), "a")) {
+            documenti = documentoRepository.findAll();
+            if (documenti.isEmpty()) {
+                response.put("documenti", JsonNodeFactory.instance.arrayNode());
+                response.put("numero_documenti", 0);
+            } else {
 
 
+                response.put("documenti", documenti);
+                response.put("numero_documenti", documenti.size());
+            }
+
+            return ResponseEntity.ok(response);
         } else {
             user_to_retrieve_from = userRepository.findByUsername(username)
-                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                    .orElse(null);
+            if (user_to_retrieve_from == null) {
+                response.put("message", "Utente non trovato con questo username." + username);
+                return ResponseEntity.badRequest().body(response);
+            }
 
         }
 
         //if the id is not specified in the request, return all the documents of the user
         if (id == null) {
-            List<Documento> documenti = documentoRepository.findAllByStudente(user_to_retrieve_from)
+            documenti = documentoRepository.findAllByStudente(user_to_retrieve_from)
                     .orElse(null);
 
             if (documenti == null) {
 
                 response.put("documenti", Collections.emptyList());
                 response.put("numero_documenti", 0);
-            }
-            else{
+            } else {
+
+
                 response.put("documenti", documenti);
+
                 response.put("numero_documenti", documenti.size());
             }
 
@@ -146,9 +197,9 @@ public class DocumentoController {
 
                 response.put("documento", null);
                 response.put("message", "Documento non trovato.");
-            }
-            else{
+            } else {
                 response.put("documento", documento);
+                response.put("studente", user_to_retrieve_from);
             }
 
 
