@@ -51,7 +51,6 @@ public class User {
     private List<Documento> documenti = new ArrayList<>();
 
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<DocumentiVisualizzati> documentiVisualizzati = new ArrayList<>();
 
 

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "documento")
 public class Documento {
-    public static final String basepath="uploads/documenti/";
+    public static final String basepath = "uploads/documenti/";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +45,9 @@ public class Documento {
     //to show the studente field in the json response
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
+
+    @JoinColumn(name = "studente_id")
     @JsonManagedReference
-    @JoinColumn(name = "studente_id" )
     private User studente;
 
     @NotNull
@@ -62,14 +63,14 @@ public class Documento {
     public Documento() {
     }
 
-    public Documento(String nome, String descrizione, Universita universita, Long dimensione, User studente, String path, String hash){
+    public Documento(String nome, String descrizione, Universita universita, Long dimensione, User studente, String path, String hash) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.universita = universita;
         this.dimensione = dimensione;
         this.studente = studente;
-        this.path= path;
-        this.hash= hash;
+        this.path = path;
+        this.hash = hash;
     }
 
     public String getHash() {

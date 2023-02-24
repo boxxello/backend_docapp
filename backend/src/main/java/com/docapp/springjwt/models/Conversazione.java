@@ -1,5 +1,7 @@
 package com.docapp.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 
@@ -19,13 +21,16 @@ public class Conversazione {
 
     @ManyToOne
     @JoinColumn(name = "studente1", nullable = false)
+    @JsonIgnore
     private User studente1;
 
     @ManyToOne
     @JoinColumn(name = "studente2", nullable = false)
+
     private User studente2;
 
     @OneToMany(mappedBy = "conversazione", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Messaggio> messaggi;
 
     public Conversazione() {
