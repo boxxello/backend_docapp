@@ -45,6 +45,8 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -58,12 +60,14 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        System.out.println("loginRequest = " + loginRequest.toString());
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
+
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
@@ -74,16 +78,8 @@ public class AuthController {
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
-    }
 
-    //make a method to search in the database for the user when the authentication is successful
-    //then return the user object
-    @PostMapping("/signin_token")
-    public ResponseEntity<?> getUser(@AuthenticationPrincipal User user) {
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+
     }
 
 
