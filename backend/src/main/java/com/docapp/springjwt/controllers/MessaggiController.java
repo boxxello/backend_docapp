@@ -4,6 +4,7 @@ import com.docapp.springjwt.exceptions.ResourceNotFoundException;
 import com.docapp.springjwt.models.Conversazione;
 import com.docapp.springjwt.models.Messaggio;
 import com.docapp.springjwt.models.User;
+import com.docapp.springjwt.payload.response.MessageResponse;
 import com.docapp.springjwt.repository.ConversazioneRepository;
 import com.docapp.springjwt.repository.MessaggioRepository;
 import com.docapp.springjwt.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -55,21 +57,37 @@ public class MessaggiController {
                 .orElseThrow(() -> new ResourceNotFoundException("Message not found"));
     }
 
-    @PostMapping("/{conversazioneId}")
-    public Messaggio createMessaggio(@PathVariable Long conversazioneId, @RequestBody Messaggio messaggio,
-                                     @AuthenticationPrincipal UserDetails userDetails) {
+    @PostMapping("/add")
+    public ResponseEntity<?> createMessaggio(@RequestBody Messaggio messaggio,
+                                             @AuthenticationPrincipal UserDetails userDetails) {
+        HashMap<String, Object> response = new HashMap<>();
+
         User currentUser = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        System.out.println(messaggio.getConversazione());
+        Long conversazioneId = messaggio.getConversazione().getId();
+        if (conversazioneId == null) {
+            response.put("message", "Conversation id is null");
+            response.put("status", "400");
+            response.put("messaggio", null);
+            return ResponseEntity.badRequest().body(response);
+        } else {
 
-        Conversazione conversazione = (Conversazione) conversazioneRepository.findByIdAndStudenti1OrStudente2(conversazioneId, currentUser)
-                .orElseThrow(() -> new ResourceNotFoundException("Conversation not found"));
-        if(messaggio.getTesto().length()<=0)
-            throw new ResourceNotFoundException("Message is empty");
-        messaggio.setConversazione(conversazione);
-        messaggio.setStudente(currentUser);
-        messaggio.setTimestamp(LocalDateTime.now());
+            Conversazione conversazione = (Conversazione) conversazioneRepository.findByIdAndStudenti1OrStudente2(conversazioneId, currentUser)
+                    .orElseThrow(() -> new ResourceNotFoundException("Conversation not found"));
+            if (messaggio.getTesto().length() <= 0)
+                throw new ResourceNotFoundException("Message is empty");
+            messaggio.setConversazione(conversazione);
+            messaggio.setStudente(currentUser);
+            messaggio.setTimestamp(LocalDateTime.now());
 
-        return messaggioRepository.save(messaggio);
+            messaggioRepository.save(messaggio);
+            response.put("message", "Message created successfully");
+            response.put("status", "200");
+            response.put("messaggio", messaggio);
+            return ResponseEntity.ok(response);
+        }
+
     }
 }
 
