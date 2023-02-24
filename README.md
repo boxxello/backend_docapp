@@ -10,25 +10,28 @@ In riferimento alla documentazione di Ingegneria del Software, questa repository
 
 
 ### Di seguito il packaging dei models
-![Screenshot](models.png)
+![image](https://user-images.githubusercontent.com/80829428/221190540-bcce36d1-9345-4ebc-8eba-38b60f280f1b.png)
 
 
 ### Di seguito il packaging dei controllers
-![Screenshot](controllers.png)
+![image](https://user-images.githubusercontent.com/80829428/221190604-5023965d-97f5-4484-8479-c1c7e22a6bd5.png)
+
 
 ### Le richieste passano tutte tramite il servizio di package security.
+![image](https://user-images.githubusercontent.com/80829428/221190667-a72c87f7-4af0-4a5f-9cf3-817e279505bd.png)
 
-![Screenshot](controllers.png)
 
 ### Le richieste
+![image](https://user-images.githubusercontent.com/80829428/221190831-4af17af0-4057-4ce6-b05b-a1a96fd76bbf.png)
 
-![Screenshot](security.png)
+
 Le richieste vengono fatte tramite un servizio di access Token.
 La sessione dura:
 tuttavia si potrebbe estendere aggiungendo un servizio di Refresh Token
+![image](https://user-images.githubusercontent.com/80829428/221190866-6b8a6fe2-5559-43d6-9abd-8f6536fba660.png)
 
-![Screenshot](signup_request_postman.png)
+
 
 
 Una richiesta di autenticazione invece risulterà in:
-![Screenshot](signin.png)
+![image](https://user-images.githubusercontent.com/80829428/221190918-8635eda2-e440-494c-912d-adb01234d13a.png)
