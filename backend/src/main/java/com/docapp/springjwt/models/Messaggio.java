@@ -6,34 +6,40 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
+/**
+
+ Entity class representing a message exchanged in a conversation.
+ */
 @Entity
 @Table(name = "messaggio")
 public class Messaggio {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conversazione_id", referencedColumnName = "id")
     private Conversazione conversazione;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_studente", referencedColumnName = "id")
     @JsonIgnore
     private User studente;
-
-
     @NotBlank
     @Column(name = "testo", columnDefinition = "TEXT")
     private String testo;
-
     @Column(name = "timestamp_msg", columnDefinition = "DATETIME")
     private LocalDateTime timestamp;
-
+    /**
+     Default constructor.
+     */
     public Messaggio() {
     }
-
+    /**
+     Constructor to create a new message.
+     @param conversazione The conversation in which the message was sent.
+     @param studente The user who sent the message.
+     @param testo The content of the message.
+     @param timestamp The timestamp of the message.
+     */
     public Messaggio(Conversazione conversazione, User studente, String testo, LocalDateTime timestamp) {
         this.conversazione = conversazione;
         this.studente = studente;
@@ -41,6 +47,7 @@ public class Messaggio {
         this.timestamp = timestamp;
     }
 
+}
     public Long getId() {
         return id;
     }
