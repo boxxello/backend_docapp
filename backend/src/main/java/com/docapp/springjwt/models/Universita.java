@@ -1,6 +1,10 @@
 package com.docapp.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -12,6 +16,7 @@ public class Universita {
     private Long id;
 
     @OneToMany(mappedBy = "universita")
+    @JsonIgnore
     private List<Documento> documenti;
 
     @OneToMany(mappedBy = "universita")
@@ -20,15 +25,16 @@ public class Universita {
     @OneToMany(mappedBy = "universita")
     private List<Facolta> facolta;
 
+    @NotBlank
     @Size(max = 40)
-    @Column(name = "nome", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "nome")
     private String nome;
 
     public Universita() {
 
     }
 
-    public Universita(List<Documento> documenti, List<CorsoDiStudio> corsiDiStudio, List<Facolta> facolta, String nome) {
+    public Universita( String nome, List<Documento> documenti, List<CorsoDiStudio> corsiDiStudio, List<Facolta> facolta) {
         this.documenti = documenti;
         this.corsiDiStudio = corsiDiStudio;
         this.facolta = facolta;
