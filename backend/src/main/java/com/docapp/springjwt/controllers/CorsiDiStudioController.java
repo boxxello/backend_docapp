@@ -1,7 +1,6 @@
 package com.docapp.springjwt.controllers;
 
 
-import com.docapp.springjwt.exceptions.ResourceNotFoundException;
 import com.docapp.springjwt.models.CorsoDiStudio;
 import com.docapp.springjwt.models.Universita;
 import com.docapp.springjwt.repository.CorsoDiStudioRepository;
@@ -10,6 +9,7 @@ import com.docapp.springjwt.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -66,19 +66,29 @@ public class CorsiDiStudioController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addCorsoDiStudio(
-            @RequestBody CorsoDiStudio corsoDiStudio,
-            @RequestParam Long id
-    ) {
-        Universita universita_trovata = universitaRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Università non trovata"));
-        corsoDiStudio.setUniversita(universita_trovata);
-        corsoDiStudioRepository.save(corsoDiStudio);
+    public ResponseEntity<?> addCorsoDiStudio(@RequestParam("id") Long id, CorsoDiStudio corsoDiStudio) {
+
+        System.out.println(id);
         HashMap<String, Object> response = new HashMap<>();
+        Universita universita_trovata = universitaRepository.findById(id)
+                .orElse(null);
+        if (universita_trovata == null) {
+            return
+                    ResponseEntity.badRequest()
+                            .body("Nessuna università trovata");
+        }
+
+        corsoDiStudio.setUniversita(universita_trovata);
+
+
+        corsoDiStudioRepository.save(corsoDiStudio);
+        System.out.println("MANNAGGIA A TONINO");
+        System.out.println(corsoDiStudio.getNome());
+
         response.put("corso", corsoDiStudio);
         response.put("message", "Corso di studio aggiunto");
-        return ResponseEntity.ok().body(
-                response
-        );
+        System.out.println(response);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(response);
     }
 }
