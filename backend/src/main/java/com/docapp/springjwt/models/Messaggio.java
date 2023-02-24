@@ -1,5 +1,7 @@
 package com.docapp.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -18,7 +20,9 @@ public class Messaggio {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_studente", referencedColumnName = "id")
+    @JsonIgnore
     private User studente;
+
 
     @NotBlank
     @Column(name = "testo", columnDefinition = "TEXT")
