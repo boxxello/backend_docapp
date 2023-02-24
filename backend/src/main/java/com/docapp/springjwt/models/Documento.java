@@ -45,9 +45,8 @@ public class Documento {
     //to show the studente field in the json response
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-
     @JoinColumn(name = "studente_id")
-    @JsonManagedReference
+
     private User studente;
 
     @NotNull
