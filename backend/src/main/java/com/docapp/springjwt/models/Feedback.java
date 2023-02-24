@@ -44,27 +44,4 @@ public class Feedback {
         this.studente = studente;
     }
 }
-    public FeedbackId getId() {
-        return id;
-    }
 
-    public void setId(FeedbackId id) {
-        this.id = id;
-    }
-
-    public Documento getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(Documento documento) {
-        this.documento = documento;
-    }
-
-    public User getStudente() {
-        return studente;
-    }
-
-    public void setStudente(User studente) {
-        this.studente = studente;
-    }
-}

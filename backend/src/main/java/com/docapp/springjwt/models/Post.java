@@ -34,7 +34,7 @@ public class Post {
         this.testo = testo;
         this.isDomanda = isDomanda;
     }
-}
+
 
     public Long getId() {
         return id;

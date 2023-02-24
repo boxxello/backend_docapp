@@ -46,7 +46,7 @@ public class DocumentiVisualizzati {
         this.studente = studente;
         this.documento = documento;
     }
-}
+
 
     public Long getId() {
         return id;

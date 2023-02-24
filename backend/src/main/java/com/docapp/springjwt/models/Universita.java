@@ -62,7 +62,7 @@ public class Universita {
         this.facolta = facolta;
         this.nome = nome;
     }
-}
+
 
     public String getNome() {
         return nome;

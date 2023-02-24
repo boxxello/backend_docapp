@@ -1,3 +1,8 @@
+/**
+
+ Custom authentication entry point for JWT.
+ If a request is made to a secured endpoint without proper authentication, this class handles the response.
+ */
 package com.docapp.springjwt.security.jwt;
 
 import java.io.IOException;
@@ -22,6 +27,15 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
   private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
+  /**
+
+   Commences an authentication scheme.
+   @param request HttpServletRequest object
+   @param response HttpServletResponse object
+   @param authException AuthenticationException object
+   @throws IOException if an error occurs while writing the response
+   @throws ServletException if a servlet-specific error occurs
+   */
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
       throws IOException, ServletException {

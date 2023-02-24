@@ -1,3 +1,7 @@
+/**
+
+ JwtUtils is a utility class that provides functions for generating, parsing, and validating JSON Web Tokens (JWTs).
+ */
 package com.docapp.springjwt.security.jwt;
 
 import java.util.Date;
@@ -24,6 +28,13 @@ public class JwtUtils {
     @Value("${docapp.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+
+    /**
+     * Generates a JWT token based on the user authentication information.
+     *
+     * @param authentication the user authentication information
+     * @return a JWT token
+     */
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -36,10 +47,22 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * Extracts the username from a JWT token.
+     *
+     * @param token a JWT token
+     * @return the username
+     */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**
+     * Parses a JWT token from an HTTP request.
+     *
+     * @param request the HTTP request
+     * @return a JWT token
+     */
     public String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 
@@ -50,6 +73,12 @@ public class JwtUtils {
         return null;
     }
 
+    /**
+     * Validates a JWT token.
+     *
+     * @param authToken a JWT token
+     * @return true if the token is valid; false otherwise
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

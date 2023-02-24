@@ -43,7 +43,7 @@ public class InterazionePost {
         this.studente = studente;
         this.id = new InterazionePostId(post.getId(), studente.getId());
     }
-}
+
     public InterazionePostId getId() {
         return id;
     }

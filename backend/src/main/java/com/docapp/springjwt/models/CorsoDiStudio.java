@@ -46,7 +46,7 @@ public class CorsoDiStudio {
         this.nome = nome;
         this.universita = universita;
     }
-}
+
     public Long getId() {
         return id;
     }

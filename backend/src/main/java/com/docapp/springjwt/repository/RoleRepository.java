@@ -9,5 +9,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
+  /**
+
+   Retrieves an optional Role object based on its name.
+   @param name the name of the role to be retrieved.
+   @return an optional Role object corresponding to the name passed as parameter, or an empty optional if the role is not found.
+   */
   Optional<Role> findByName(ERole name);
 }

@@ -62,7 +62,7 @@ public class Conversazione {
         this.studente1 = studente1;
         this.studente2 = studente2;
     }
-}
+
     public Long getId() {
         return id;
     }

@@ -19,6 +19,19 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+
+ This class is responsible for filtering incoming requests and adding authentication details to the
+ SecurityContextHolder if a valid JWT token is present.
+ <p>
+ It uses the JwtUtils class to validate and extract the username from the JWT token, and then
+ loads the UserDetails from the UserDetailsService implementation provided in the constructor.
+ <p>
+ If a valid JWT token is present and the UserDetails are successfully loaded, an
+ Authentication object is created and added to the SecurityContextHolder.
+ <p>
+ If any error occurs during the filtering process, an error message is logged.
+ */
 public class AuthTokenFilter extends OncePerRequestFilter {
   @Autowired
   private JwtUtils jwtUtils;
@@ -28,6 +41,11 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
   private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
+  /**
+
+   This class implements the filter responsible for handling authentication tokens.
+   It extends OncePerRequestFilter to ensure that it is only executed once per request.
+   */
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {

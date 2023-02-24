@@ -40,7 +40,6 @@ public class Facolta {
         this.nome = nome;
         this.universita = universita;
     }
-}
 
     public Long getId() {
         return id;

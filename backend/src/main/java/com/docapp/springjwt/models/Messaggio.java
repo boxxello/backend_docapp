@@ -47,7 +47,6 @@ public class Messaggio {
         this.timestamp = timestamp;
     }
 
-}
     public Long getId() {
         return id;
     }
