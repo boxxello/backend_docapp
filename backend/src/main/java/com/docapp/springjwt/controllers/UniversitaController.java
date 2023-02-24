@@ -63,9 +63,8 @@ public class UniversitaController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<?> addUniversita(
-            @RequestBody @Valid Universita universita
-    ) {
+    public ResponseEntity<?> addUniversita(Universita universita) {
+        System.out.println(universita.getNome());
         Universita universita_trovata = universitaRepository.findByNome(universita.getNome())
                 .orElse(null);
         if (universita_trovata != null) {
@@ -73,6 +72,8 @@ public class UniversitaController {
                     .badRequest()
                     .body(new MessageResponse("L'università esiste già"));
         }
+//        Universita universita = new Universita();
+//        universita.setNome(nome);
         universitaRepository.save(universita);
         return ResponseEntity.ok().body(new MessageResponse("Università aggiunta con successo"));
 
