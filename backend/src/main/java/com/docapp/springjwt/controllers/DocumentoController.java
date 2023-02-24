@@ -109,6 +109,7 @@ public class DocumentoController {
     public ResponseEntity<?> getDocumenti(@AuthenticationPrincipal UserDetails userDetails,
                                           @RequestParam(required = false) Long id,
                                           @RequestParam(required = false) String username) {
+        HashMap<String, Object> response = new HashMap<>();
         //if the username is not specified in the request, return the current user's documents
         User user_to_retrieve_from;
         if (username == null) {
@@ -125,13 +126,35 @@ public class DocumentoController {
         //if the id is not specified in the request, return all the documents of the user
         if (id == null) {
             List<Documento> documenti = documentoRepository.findAllByStudente(user_to_retrieve_from)
-                    .orElseThrow(() -> new ResourceNotFoundException("No document found for this user " + user_to_retrieve_from.getUsername() + "."));
-            return ResponseEntity.ok().body(documenti);
+                    .orElse(null);
+
+            if (documenti == null) {
+
+                response.put("documenti", Collections.emptyList());
+                response.put("numero_documenti", 0);
+            }
+            else{
+                response.put("documenti", documenti);
+                response.put("numero_documenti", documenti.size());
+            }
+
+
         } else {
             Documento documento = documentoRepository.findByIdAndStudente(id, user_to_retrieve_from)
-                    .orElseThrow(() -> new ResourceNotFoundException("Documento " + id + " non trovato per l'utente " + user_to_retrieve_from.getUsername() + "."));
-            return ResponseEntity.ok().body(documento);
+                    .orElse(null);
+            if (documento == null) {
+
+                response.put("documento", null);
+                response.put("message", "Documento non trovato.");
+            }
+            else{
+                response.put("documento", documento);
+            }
+
+
         }
+        System.out.println(response);
+        return ResponseEntity.ok().body(response);
 
     }
 
