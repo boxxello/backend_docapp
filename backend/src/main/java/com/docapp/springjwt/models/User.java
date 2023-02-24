@@ -11,6 +11,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+
+ A class representing a user of the system.
+ */
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
@@ -21,46 +25,45 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     @NotBlank
     @Size(max = 20)
     private String username;
-
     @NotBlank
     @Size(max = 50)
     @Email
     private String email;
-
     @NotBlank
     @Size(max = 120)
     @JsonIgnore
     private String password;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private transient List<Documento> documenti = new ArrayList<>();
-
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private transient List<DocumentiVisualizzati> documentiVisualizzati = new ArrayList<>();
-
-
+    /**
+     Default constructor for User class.
+     */
     public User() {
     }
-
-    public User( String username, String email, String password) {
+    /**
+     Constructor for User class.
+     @param username the username of the user
+     @param email the email address of the user
+     @param password the password of the user
+     */
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
+}
     public Long getId() {
         return id;
     }

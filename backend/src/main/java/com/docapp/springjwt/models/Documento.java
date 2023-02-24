@@ -24,8 +24,7 @@ public class Documento {
     @Size(max = 70)
     @Column(name = "nome")
     private String nome;
-
-    //regex per descrizione
+    
     @Pattern(regexp = "^[A-Za-z0-9.,; ]*$", message = "Descrizione cannot contain special characters")
     @Size(max = 650)
     @NotNull
@@ -40,9 +39,6 @@ public class Documento {
     @Column(name = "dimensione")
     private Long dimensione;
 
-
-    //we use JsonManagedReference to avoid infinite recursion, but also
-    //to show the studente field in the json response
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "studente_id")

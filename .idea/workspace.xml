@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4007cee-d915-45e9-bce2-d18971c650e0" name="Changes" comment="Unione backend con shared" />
+    <list default="true" id="a4007cee-d915-45e9-bce2-d18971c650e0" name="Changes" comment="Unione backend con shared">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Conversazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Conversazione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/CorsoDiStudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/CorsoDiStudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/DocumentiVisualizzati.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/DocumentiVisualizzati.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Documento.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Documento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/ERole.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/ERole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Facolta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Facolta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Feedback.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Feedback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/FeedbackId.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/FeedbackId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/InterazionePost.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/InterazionePost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/InterazionePostId.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/InterazionePostId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Messaggio.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Messaggio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Universita.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/Universita.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/docapp/springjwt/models/User.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,26 +47,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/fbosso/IdeaProjects/DocApp_Classe03&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;41d3db99fb097b7c1754f182c13c6050&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
   <component name="RunManager">
     <configuration name="SpringBootSecurityJwtApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ACTIVE_PROFILES" />
       <module name="backend_docapp" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.docapp.springjwt.SpringBootSecurityJwtApplication" />
+      <option name="ACTIVE_PROFILES" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -73,6 +85,7 @@
       <workItem from="1676241412347" duration="689000" />
       <workItem from="1676317705663" duration="10000" />
       <workItem from="1676400749743" duration="6000" />
+      <workItem from="1677245969169" duration="1378000" />
     </task>
     <task id="LOCAL-00001" summary="Removed mod user, not needed">
       <created>1673812048693</created>
