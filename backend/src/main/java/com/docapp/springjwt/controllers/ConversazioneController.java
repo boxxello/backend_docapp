@@ -1,25 +1,14 @@
 package com.docapp.springjwt.controllers;
 
-import com.docapp.Utils.ConnPom;
-
 import com.docapp.springjwt.exceptions.ResourceNotFoundException;
 import com.docapp.springjwt.models.Conversazione;
 import com.docapp.springjwt.models.User;
-import com.docapp.springjwt.payload.request.ConversazioneRequest;
-import com.docapp.springjwt.payload.request.MessaggioRequest;
 import com.docapp.springjwt.repository.ConversazioneRepository;
-import com.docapp.springjwt.repository.RoleRepository;
 import com.docapp.springjwt.repository.UserRepository;
-import com.docapp.springjwt.security.jwt.JwtUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -66,16 +55,22 @@ public class ConversazioneController {
         }
     }
 
-    @PutMapping("/new")
-    public Conversazione createConversazione(@AuthenticationPrincipal UserDetails userDetails,
-                                             @RequestBody Conversazione conversazione) {
+    @PostMapping("/getOrCreate")
+    public Conversazione getOrCreateConversazione(@AuthenticationPrincipal UserDetails userDetails,
+                                              @RequestBody  Conversazione conversazione) {
+
         // Get the signed in user
         User currentUser = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         //check if the studente2 exists
-        System.out.println(conversazione.getStudente2().getUsername());
+        if (conversazione.getStudente2() == null) {
+            throw new IllegalArgumentException("Studente2 cannot be null");
+        }
+
         User studente2 = userRepository.findByUsername(conversazione.getStudente2().getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User2 not found"));
+
+
 
         System.out.println("Qui arrivo");
         //check if the conversation already exists
