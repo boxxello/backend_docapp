@@ -47,11 +47,12 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
-    private List<Documento> documenti = new ArrayList<>();
+    @JsonIgnore
+    private transient List<Documento> documenti = new ArrayList<>();
 
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DocumentiVisualizzati> documentiVisualizzati = new ArrayList<>();
+    @JsonIgnore
+    private transient List<DocumentiVisualizzati> documentiVisualizzati = new ArrayList<>();
 
 
     public User() {
