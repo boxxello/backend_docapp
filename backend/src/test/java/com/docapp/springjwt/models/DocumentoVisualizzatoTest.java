@@ -74,7 +74,11 @@ public class DocumentoVisualizzatoTest{
 
         documento.setDescrizione("descrizione");
         // Create a new instance of DocumentoVisualizzato
+        documento.setPath("C:\\Users\\Daniele\\Desktop\\test\\test.pdf");
+
+        documento.setHash("55e9f259f3cd3be8cada7eba8e7814c9");
         documentoRepository.save(documento);
+
 
 
 
