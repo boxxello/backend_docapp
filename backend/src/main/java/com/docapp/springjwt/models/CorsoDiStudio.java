@@ -1,6 +1,10 @@
 package com.docapp.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "corso_di_studio")
@@ -9,11 +13,14 @@ public class CorsoDiStudio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome", length = 30, nullable = false)
+    @NotBlank
+    @Size(max = 30)
+    @Column(name = "nome")
     private String nome;
 
     @ManyToOne
     @JoinColumn(name = "universita_id")
+    @JsonIgnore
     private Universita universita;
 
     public CorsoDiStudio() {
