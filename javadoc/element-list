@@ -1,0 +1,11 @@
+com.docapp.springjwt
+com.docapp.springjwt.controllers
+com.docapp.springjwt.exceptions
+com.docapp.springjwt.models
+com.docapp.springjwt.payload.request
+com.docapp.springjwt.payload.response
+com.docapp.springjwt.repository
+com.docapp.springjwt.security
+com.docapp.springjwt.security.jwt
+com.docapp.springjwt.security.services
+com.docapp.Utils
